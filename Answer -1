@@ -1,0 +1,54 @@
+exercise-1
+class GraphShortestPath(Graph):
+
+    def shortest_path(self, start, end): 
+        """
+        Calculate the shortest path from a starting node to an ending node in a sparse graph
+        with potentially 10000s of nodes. Must run under 0.5 second and find the shortest distance between two nodes.
+
+        Parameters:
+        start: The starting node.
+        end: The ending node.
+
+        Returns:
+        A tuple containing the total distance of the shortest path and a list of nodes representing that path.
+        """
+        # Initialize distances and previous node tracking
+        distances = {node: float('inf') for node in self.graph}
+        previous_nodes = {node: None for node in self.graph}
+        distances[start] = 0
+
+        # Priority queue to hold nodes to explore
+        priority_queue = [(0, start)]
+
+        while priority_queue:
+            current_distance, current_node = heapq.heappop(priority_queue)
+
+            # If we reach the end node, reconstruct the path
+            if current_node == end:
+                path = []
+                while current_node is not None:
+                    path.append(current_node)
+                    current_node = previous_nodes[current_node]
+                path.reverse()
+                dist = current_distance
+                return dist, path
+
+            # If a better path is already found, continue
+            if current_distance > distances[current_node]:
+                continue
+
+            # Explore neighbors
+            for neighbor, weight in self.graph[current_node].items():
+                distance = current_distance + weight
+
+                # If a shorter path is found
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    previous_nodes[neighbor] = current_node
+                    heapq.heappush(priority_queue, (distance, neighbor))
+
+        # If no path is found, return infinity and an empty path
+        dist = float('inf')
+        path = []
+        return dist, path
