@@ -1,0 +1,35 @@
+class GraphTSPSmallGraph(Graph):
+    def tsp_small_graph(self, start_vertex): 
+        """
+        Solve the Travelling Salesman Problem for a small (~10 node) complete graph starting from a specified node.
+        Required to find the optimal tour. Expect graphs with at most 10 nodes. Must run under 1 second.
+        
+        Parameters:
+        start_vertex: The starting node.
+        
+        Returns:
+        A tuple containing the total distance of the tour and a list of nodes representing the tour path.
+        """
+        # Get all vertices except the start_vertex
+        vertices = [v for v in self.graph if v != start_vertex]
+        
+        # Initialize minimum distance to infinity
+        min_distance = float('inf')
+        best_path = None
+        
+        # Generate all permutations of the vertices
+        for perm in itertools.permutations(vertices):
+            # Calculate the total distance of the tour
+            current_distance = 0
+            current_path = [start_vertex] + list(perm) + [start_vertex]
+            
+            for i in range(len(current_path) - 1):
+                current_distance += self.graph[current_path[i]][current_path[i + 1]]
+            
+            # Update minimum distance and best path if current tour is shorter
+            if current_distance < min_distance:
+                min_distance = current_distance
+                best_path = current_path
+        
+        return min_distance, best_path
+
