@@ -1,0 +1,39 @@
+class GraphTSPLargeGraph(Graph):
+    def tsp_large_graph(self, start): 
+        """
+        Solve the Travelling Salesman Problem for a large (~1000 node) complete graph starting from a specified node.
+        No requirement to find the optimal tour. Must run under 0.5 seconds and its solution must no
+        
+        Parameters:
+        start: The starting node.
+        
+        Returns:
+        A tuple containing the total distance of the tour and a list of nodes representing the tour path.
+        """
+        # Initialize the path and visited set
+        path = [start]
+        visited = set(path)
+        current_node = start
+        total_distance = 0
+        
+        # Iterate until all nodes are visited
+        while len(visited) < len(self.graph):
+            # Find the nearest unvisited neighbor
+            nearest_neighbor = None
+            min_distance = float('inf')
+            for neighbor, distance in self.graph[current_node].items():
+                if neighbor not in visited and distance < min_distance:
+                    nearest_neighbor = neighbor
+                    min_distance = distance
+            
+            # Move to the nearest neighbor
+            path.append(nearest_neighbor)
+            visited.add(nearest_neighbor)
+            total_distance += min_distance
+            current_node = nearest_neighbor
+        
+        # Complete the tour by returning to the start
+        total_distance += self.graph[current_node][start]
+        path.append(start)
+        
+        return total_distance, path
