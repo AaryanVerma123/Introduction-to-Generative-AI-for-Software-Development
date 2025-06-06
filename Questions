@@ -1,0 +1,25 @@
+Exercise 1: shortest_path (Sparse Graphs, 10,000 nodes, Optimal Solution, 0.5 seconds)
+In this challenge you will be given a large graph with tens of thousands of nodes. The graph is "sparse", however, meaning that each vertex may only have edges leading to a few other vertices.
+You will need to develop an algorithm to find the shortest path between two vertices in this graph. The solution will be the length of the path, and the list of vertices along that path. 
+This is a classic computer science problem, and there are a few standard algorithms your LLM is likely to suggest. To ensure your code is efficient, it must execute in less than 0.5 seconds.
+
+
+Exercise 2: 
+tsp_small_graph (Complete Graphs, 10 nodes, Optimal Solution, 1 second)
+The Traveling Salesman Problem asks you to find the shortest path through a graph that visits all vertices and returns to the start, also called a "tour".
+This problem famously is computationally intensive for large graphs, making it essentially impossible to find the absolute best solution. 
+For smaller graphs, however, a brute force approach is possible, and that's the first version of the Traveling Salesman Problem you'll tackle.
+
+Exercise 3: tsp_large_graph (Complete Graphs, 1,000 nodes, "Pretty Good" Solution, 0.5 seconds)
+In this exercise you again tackle the Traveling Salesman Problem, but for much larger graphs of about 1,000 nodes. Once again the graph is complete, with an edge between every pair of nodes.
+In graphs this size, a brute force approach is now computationally infeasible, so the tour length requirement on this method has been loosened substantially. 
+You now must simply find a "pretty good" tour through the graph using some kind of heuristic approach.
+There are several commonly-used heuristics, and almost all of them (with the exception perhaps of randomly generating a tour) will produce tours that are short enough to pass the tests on this method. 
+While your solution no longer needs to be optimal, your code should run quickly, in less than 0.5 seconds. Have your LLM focus on speed rather than tour length, and you should find an algorithm that works!
+
+Exercise 4: tsp_medium_graph (Complete Graphs, 300 nodes, Near-Optimal Solution, 1.5 seconds)
+In this last version of the Traveling Salesman Problem, you will need to work with an LLM to develop a solution that improves upon the algorithm you used in Exercise 3. 
+Now you will be given complete graphs of about 300 nodes. The time requirement has been relaxed to 1.5 seconds, giving your algorithm 3 times as long to run. 
+The tour length requirements, however, have been tightened, meaning you'll need to find tours that are much closer to the theoretical optimum. 
+This likely means that the heuristic you used in Exercise 3 will no longer produce short enough tours. 
+Brainstorm with your LLM new heuristics you could implement that take advantage of the longer runtime you're allowed and generate relatively shorter tours.
